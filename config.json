@@ -1,8 +1,7 @@
 {
-    "cron": "00 00 */6 * * *",
     "urls": [
         {
-            "url": "https://www.google.com",
+            "url": "https://www.davidmojo.com",
             "plugins": [
                 {
                     "name": "lighthouse",
