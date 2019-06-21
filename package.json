@@ -24,12 +24,12 @@
     ],
     "dependencies": {
         "body-parser": "^1.18.3",
-        "chrome-launcher": "^0.10.2",
+        "chrome-launcher": "^0.10.7",
         "cron": "^1.4.1",
         "express": "^4.16.3",
         "fs-extra": "^7.0.0",
         "influx": "^5.0.7",
-        "lighthouse": "^4.0.0",
+        "lighthouse": "^5.1.0",
         "serve-index": "^1.9.1",
         "winston": "^3.0.0"
     },

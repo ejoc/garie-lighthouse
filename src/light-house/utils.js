@@ -1,34 +1,26 @@
-const lighthouse = require('lighthouse');
-const chromeLauncher = require('chrome-launcher');
-const ReportGenerator = require('lighthouse/lighthouse-core/report/report-generator');
+const lighthouse = require("lighthouse");
+const chromeLauncher = require("chrome-launcher");
+const ReportGenerator = require("lighthouse/lighthouse-core/report/report-generator");
 
-const chromeFlags = [
-	'--disable-gpu',
-	'--headless',
-	'--no-zygote',
-	'--no-sandbox',
-	'--headless',
-];
+const chromeFlags = ["--no-zygote", "--no-sandbox", "--headless"];
 
 const launchChromeAndRunLighthouse = async (url, config) => {
+  const chrome = await chromeLauncher.launch({ chromeFlags });
 
-	const chrome = await chromeLauncher.launch({ chromeFlags });
+  const flags = {
+    port: chrome.port,
+    output: "json"
+  };
 
-	const flags = {
-		port: chrome.port,
-		output: 'json',
-	};
+  const result = await lighthouse(url, flags, config);
+  await chrome.kill();
 
-	const result = await lighthouse(url, flags, config);
-	await chrome.kill();
-
-	return result;
+  return result;
 };
 
 const createReport = results => ReportGenerator.generateReportHtml(results);
 
-
 module.exports = {
-	launchChromeAndRunLighthouse,
-	createReport
-}
+  launchChromeAndRunLighthouse,
+  createReport
+};
