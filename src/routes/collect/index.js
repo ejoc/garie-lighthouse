@@ -20,11 +20,8 @@ router.post("/", async (req, res, next) => {
     await saveData(url, filteredData);
     let lighthouseReport = undefined;
     if (report) {
-      lighthouseReport = await saveReport(url, raw);
-      lighthouseReport = `${req.protocol}://${req.get(
-        "host"
-      )}/${lighthouseReport}`;
-      logger.info(`reporte :) ${lighthouseReport}`);
+      const outputPath = await saveReport(url, raw);
+      lighthouseReport = `${req.protocol}://${req.get("host")}/${outputPath}`;
     }
 
     res.status(201).send({ ...filteredData, lighthouseReport });
